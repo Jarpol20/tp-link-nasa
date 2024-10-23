@@ -1,6 +1,6 @@
 // PhotoGridView.tsx
 import React, { useState } from "react";
-import { View, FlatList, StyleSheet } from "react-native";
+import { View, FlatList, StyleSheet, Dimensions } from "react-native";
 import { Appbar } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNASAPhotos } from "../hooks/useNASAPhotos";
@@ -13,6 +13,10 @@ import { COLORS } from "../constants/colors";
 import { handleError } from "../utils/helpers";
 
 type SortOrder = "asc" | "desc";
+
+const { width } = Dimensions.get("window");
+const SPACING = 8;
+const NUM_COLUMNS = 2;
 
 const PhotoGridView = () => {
   const { data, isLoading, error, refetch } = useNASAPhotos();
@@ -67,7 +71,9 @@ const PhotoGridView = () => {
         data={sortedData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
-        numColumns={3}
+        numColumns={NUM_COLUMNS}
+        contentContainerStyle={styles.listContainer}
+        columnWrapperStyle={styles.row}
       />
     </View>
   );
@@ -78,9 +84,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
+  listContainer: {
+    padding: SPACING,
+  },
+  row: {
+    justifyContent: "space-between",
+  },
   gridCard: {
-    flex: 1,
-    margin: 4,
+    width: (width - SPACING * (NUM_COLUMNS + 1)) / NUM_COLUMNS,
+    marginBottom: SPACING,
   },
 });
 
