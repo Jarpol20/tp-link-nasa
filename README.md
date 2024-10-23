@@ -2,6 +2,11 @@
 
 A React Native mobile application that displays photos from NASA's Mars Rover using the NASA API. Built with Expo, React Navigation, and React Native Paper.
 
+
+https://github.com/user-attachments/assets/c9e0c30b-567b-4fee-a01a-44ef74537d64
+
+
+
 ## Features
 
 - View Mars Rover photos in both list and grid layouts
